@@ -22,7 +22,7 @@ export default {
   },
   async mounted() {
     const res = await fetch(
-      "https://jsonplaceholder.typicode.com/posts?_limit=3"
+      "https://jsonplaceholder.typicode.com/posts?_limit=10"
     );
     const posts = await res.json();
     this.posts = posts;
@@ -62,6 +62,7 @@ html {
 
 .post {
   border: 1px solid #efefef;
+  border-top: 0;
   padding: 1rem;
   
   & > h2 {
@@ -69,13 +70,13 @@ html {
   }
 
   &:nth-child(2) {
-    border-bottom: 0;
     border-radius: 5px 5px 0 0;
+    border-top: 1px solid #efefef;
   }
 
   &:last-child {
-    border-top: 0;
     border-radius: 0 0 5px 5px;
+    border-top: 0;
   }
 }
 </style>
