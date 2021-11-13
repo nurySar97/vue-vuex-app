@@ -1,26 +1,52 @@
 <template>
-  <form class="post-form">
+  <form class="post-form" @submit.prevent="onSubmit">
     <div class="post-form__item">
-      <label for="title">Title</label>
+      <label
+        class="post-form__label"
+        for="title"
+        v-bind:class="{ ['post-form__label--active']: title.length }"
+        >Title</label
+      >
       <input
         class="post-form__input"
         id="title"
         type="text"
         placeholder="Title"
+        v-model="title"
       />
     </div>
     <div class="post-form__item">
-      <label for="body">Body</label>
+      <label
+        class="post-form__label"
+        for="body"
+        v-bind:class="{ ['post-form__label--active']: body.length }"
+        >Body</label
+      >
       <input
         class="post-form__input"
         id="body"
         type="text"
         placeholder="Body"
+        v-model="body"
       />
     </div>
     <button class="post-form__btn" type="submit">Create post</button>
   </form>
 </template>
+
+<script>
+export default {
+  data: () => ({
+    title: "",
+    body: "",
+  }),
+  methods: {
+    onSubmit() {
+      console.log(this.title);
+    },
+  },
+};
+</script>
 
 <style lang="scss" scoped>
 $white: #fff;
@@ -31,6 +57,7 @@ $secondary: #6c757d;
   display: block;
   margin-bottom: 1rem;
   font-size: 1rem;
+  text-align: center;
 
   &__item {
     width: 100%;
@@ -40,17 +67,17 @@ $secondary: #6c757d;
 
     font-size: inherit;
     max-width: 30em;
-    margin: 1em 0;
+    margin: 1em auto;
 
     &:focus-within {
-      & > label {
+      & > .post-form__label {
         top: -1.15em;
         font-size: 0.75em;
         color: $white;
       }
     }
 
-    & > label {
+    & > .post-form__label {
       position: absolute;
       color: $secondary;
 
@@ -60,17 +87,25 @@ $secondary: #6c757d;
       padding-left: 0.5em;
       transition: all 0.25s linear;
       cursor: text;
+
+      &.post-form__label--active {
+        top: -1.15em;
+        font-size: 0.75em;
+        color: $white;
+      }
     }
   }
 
   &__input {
     width: 100%;
     outline: none;
-    color: $black;
+
+    text-transform: capitalize;
 
     font-size: inherit;
     padding: 0.5em;
     border-radius: 0.5em;
+    color: $black;
     border: 0.1em solid $secondary;
 
     &[placeholder="Title"] {
