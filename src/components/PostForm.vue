@@ -35,14 +35,24 @@
 </template>
 
 <script>
+import { mapMutations } from "vuex";
 export default {
   data: () => ({
     title: "",
     body: "",
   }),
   methods: {
+    ...mapMutations(["createPost"]),
     onSubmit() {
-      console.log(this.title);
+      if (this.title && this.body) {
+        this.createPost({
+          id: Date.now(),
+          title: this.title,
+          body: this.body,
+        });
+        this.title = "";
+        this.body = "";
+      }
     },
   },
 };

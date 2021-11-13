@@ -19,6 +19,9 @@ const post = {
     setIsPostsLoaded(state, value = false) {
       state.isPostsLoaded = value;
     },
+    createPost(state, post={}){
+      state.posts.unshift(post)
+    }
   },
   state: {
     posts: [],
