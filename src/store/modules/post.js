@@ -19,16 +19,18 @@ const post = {
     setIsPostsLoaded(state, value = false) {
       state.isPostsLoaded = value;
     },
-    createPost(state, post={}){
-      state.posts.unshift(post)
-    }
+    createPost(state, post = {}) {
+      state.posts.unshift(post);
+    },
   },
   state: {
     posts: [],
     isPostsLoaded: false,
   },
   getters: {
-    getAllPosts: (state) => state.posts,
+    getAllPosts(state) {
+      return state.posts.filter(({ title, body }) => title && body);
+    },
     getPostsCount: (state) => state.posts.length,
   },
 };

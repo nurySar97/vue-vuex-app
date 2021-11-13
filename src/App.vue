@@ -2,10 +2,12 @@
   <div id="app">
     <div class="container">
       <div class="posts">
-        <!-- Posts -->
         <h1>Posts</h1>
+
+        <!-- Post Form -->
         <PostForm />
 
+        <!-- Posts -->
         <div v-if="isPostsLoaded && getPostsCount">
           <div
             class="post"
@@ -70,7 +72,7 @@ html {
   color: #fff;
   margin: 0;
   padding: 0;
-  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-family: Georgia, "Times New Roman", Times, serif;
 }
 
 #app {

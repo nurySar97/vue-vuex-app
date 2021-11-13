@@ -52,6 +52,13 @@ export default {
         });
         this.title = "";
         this.body = "";
+        return;
+      } else if (!this.title && !this.body) {
+        alert("Enter please post!");
+      } else if (!this.title) {
+        alert("Enter please title!");
+      } else if (!this.body) {
+        alert("Enter please body!");
       }
     },
   },
