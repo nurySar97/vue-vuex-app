@@ -3,7 +3,7 @@
     <div class="container">
       <div class="posts">
         <h1>Posts</h1>
-        <div class="post" v-for="(post, index) in posts" :key="index">
+        <div class="post" v-for="(post, index) in allPosts" :key="index">
           <h2>{{ post.title }}</h2>
           <p>{{ post.body }}</p>
         </div>
@@ -15,6 +15,11 @@
 <script>
 export default {
   name: "App",
+  computed: {
+    allPosts(){
+      return this.$store.getters.allPosts
+    }
+  },
   data() {
     return {
       posts: [],
