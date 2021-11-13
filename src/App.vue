@@ -4,12 +4,12 @@
       <div class="posts">
         <!-- Posts -->
         <h1>Posts</h1>
-        <div v-if="allPosts.length">
+        <div v-if="isPostsLoaded && getPostsCount">
           <div
             class="post"
-            v-for="(post, index) in allPosts"
+            v-for="(post, index) in getAllPosts"
             :key="index"
-            v-bind:class="{ ['post--alone']: allPosts.length === 1 }"
+            v-bind:class="{ ['post--alone']: getPostsCount === 1 }"
           >
             <h2>{{ post.title }}</h2>
             <p>{{ post.body }}</p>
@@ -17,12 +17,12 @@
         </div>
 
         <!-- Spinner -->
-        <div class="text-center" v-if="!isLoaded">
+        <div class="text-center" v-if="!isPostsLoaded">
           <img width="100px" src="./assets/spinner.svg" alt="spinner" />
         </div>
 
         <!-- Alt alert  -->
-        <p class="text-center" v-if="!allPosts.length && isLoaded">
+        <p class="text-center" v-if="!getPostsCount && isPostsLoaded">
           No posts yet
         </p>
       </div>
@@ -31,30 +31,20 @@
 </template>
 
 <script>
+import { mapGetters, mapActions, mapState } from "vuex";
 export default {
   name: "App",
   computed: {
-    allPosts() {
-      return this.$store.getters.allPosts;
-    },
-  },
-  data() {
-    return {
-      posts: [],
-      isLoaded: false,
-    };
+    ...mapState({ isPostsLoaded: (s) => s.post.isPostsLoaded }),
+    ...mapGetters(["getAllPosts", "getPostsCount"]),
   },
   methods: {
+    ...mapActions(["fetchPosts"]),
     sleep: (time = 1000) => new Promise((r) => setTimeout(r, time)),
   },
   async mounted() {
-    const res = await fetch(
-      "https://jsonplaceholder.typicode.com/posts?_limit=10"
-    );
-    const posts = await res.json();
     await this.sleep();
-    this.posts = posts;
-    this.isLoaded = true;
+    this.fetchPosts(3);
   },
 };
 </script>
@@ -119,5 +109,4 @@ html {
 .text-center {
   text-align: center;
 }
-
 </style>
