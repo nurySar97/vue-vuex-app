@@ -4,6 +4,8 @@
       <div class="posts">
         <!-- Posts -->
         <h1>Posts</h1>
+        <PostForm />
+
         <div v-if="isPostsLoaded && getPostsCount">
           <div
             class="post"
@@ -32,8 +34,12 @@
 
 <script>
 import { mapGetters, mapActions, mapState } from "vuex";
+import PostForm from "./components/PostForm.vue";
 export default {
   name: "App",
+  components: {
+    PostForm,
+  },
   computed: {
     ...mapState({ isPostsLoaded: (s) => s.post.isPostsLoaded }),
     ...mapGetters(["getAllPosts", "getPostsCount"]),
@@ -64,6 +70,7 @@ html {
   color: #fff;
   margin: 0;
   padding: 0;
+  font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 #app {
