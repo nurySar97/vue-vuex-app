@@ -2,7 +2,11 @@
   <div id="app">
     <div class="container">
       <div class="posts">
-
+        <h1>Posts</h1>
+        <div class="post" v-for="(post, index) in posts" :key="index">
+          <h2>{{ post.title }}</h2>
+          <p>{{ post.body }}</p>
+        </div>
       </div>
     </div>
   </div>
@@ -56,9 +60,22 @@ html {
   margin: 0 auto;
 }
 
-.posts {
-  padding: 1rem;
+.post {
   border: 1px solid #efefef;
-  border-radius: 5px;
+  padding: 1rem;
+  
+  & > h2 {
+    text-transform: capitalize;
+  }
+
+  &:nth-child(2) {
+    border-bottom: 0;
+    border-radius: 5px 5px 0 0;
+  }
+
+  &:last-child {
+    border-top: 0;
+    border-radius: 0 0 5px 5px;
+  }
 }
 </style>
